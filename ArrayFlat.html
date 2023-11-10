@@ -7,7 +7,19 @@
   </head>
   <body></body>
   <script>
-    const arr = [[12, 12, [4, 6, [53, 2]]], 89, [234]];
+    const arr = [1, [1, 2, 3]];
     //array flat
+    Array.prototype.myFlat = function () {
+      let flat = [];
+      for (let item of this) {
+        if (Array.isArray(item)) {
+          flat = flat.concat(item.myFlat());
+        } else {
+          flat.push(item);
+        }
+      }
+      return flat;
+    };
+    console.log(arr.myFlat());
   </script>
 </html>
