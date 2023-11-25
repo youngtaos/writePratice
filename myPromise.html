@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myPromise</title>
+  </head>
+  <body></body>
+  <script>
+    class myPromise {
+      //添加构造函数
+      constructor(func) {
+        //定义resolve,reject
+        const resolve = (result) => {
+          console.log("resolve");
+        };
+        const reject = (result) => {
+          console.log("reject");
+        };
+        console.log("create success");
+        //执行回调函数
+        func(resolve, reject);
+      }
+    }
+
+    const p = new myPromise((res, rej) => {
+      res();
+      rej();
+    });
+  </script>
+</html>
