@@ -11,13 +11,14 @@
     const FULFILLED = "fulfilled";
     const REJECTED = "rejected";
     class myPromise {
-      //添加状态
+      //add state
       state = PENDING;
       result = undefined;
-      //添加构造函数
+      //add constructor
       constructor(func) {
-        //定义resolve,reject
+        //define resolve,reject
         const resolve = (result) => {
+          //promise state is irreversible(不可逆的)
           if (this.state === PENDING) {
             this.state = FULFILLED;
             this.result = result;
@@ -29,7 +30,7 @@
             this.result = result;
           }
         };
-        //执行回调函数
+        //Execute callback function
         func(resolve, reject);
       }
     }
