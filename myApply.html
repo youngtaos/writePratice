@@ -11,19 +11,16 @@
       name: "yts",
     };
 
-    Function.prototype.myCall = function (argObj, ...args) {
-      //设置this指向并且调用函数
-      const f = Symbol("f");
-      argObj[f] = this;
-      const res = argObj[f](...args);
-      delete argObj.f;
-      return res;
+    Function.prototype.myApply = function (argObj, arr) {
+      const key = Symbol("key");
+      argObj[key] = this;
+      argObj[key]();
     };
 
     function sayHi(name) {
       return `Hi!, ${name}`;
     }
-    const res = sayHi.myCall(obj, obj.name);
+    const res = sayHi.myApply(obj, [obj.name]);
     console.log(res);
   </script>
 </html>
