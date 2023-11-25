@@ -12,7 +12,9 @@
     };
 
     Function.prototype.myCall = function (argObj, ...args) {
-      argObj.f = this;
+      //设置this指向并且调用函数
+      const f = Symbol("f");
+      argObj[f] = this;
       const res = argObj.f(...args);
       delete argObj.f;
       return res;
