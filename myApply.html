@@ -8,19 +8,21 @@
   <body></body>
   <script>
     const obj = {
-      name: "yts",
+      name: "yts1",
     };
 
     Function.prototype.myApply = function (argObj, arr) {
       const key = Symbol("key");
       argObj[key] = this;
-      argObj[key]();
+      const res = argObj[key](...arr);
+      delete argObj[key];
+      return res;
     };
 
-    function sayHi(name) {
-      return `Hi!, ${name}`;
+    function sayHi(name, a) {
+      return `Hi!, ${name} ${a}`;
     }
-    const res = sayHi.myApply(obj, [obj.name]);
-    console.log(res);
+    const res = sayHi.myApply(obj, [obj.name, 666]);
+    console.log(res, obj);
   </script>
 </html>

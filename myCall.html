@@ -16,7 +16,7 @@
       const f = Symbol("f");
       argObj[f] = this;
       const res = argObj[f](...args);
-      delete argObj.f;
+      delete argObj[f];
       return res;
     };
 
@@ -24,6 +24,6 @@
       return `Hi!, ${name}`;
     }
     const res = sayHi.myCall(obj, obj.name);
-    console.log(res);
+    console.log(obj, res);
   </script>
 </html>
