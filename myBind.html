@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myBind</title>
+  </head>
+  <body></body>
+  <script>
+    const obj = {
+      name: "yts",
+    };
+
+    Function.prototype.myBind = function (argObj, ...args1) {
+      return (...args2) => {
+        return this.call(argObj, ...args1, ...args2);
+      };
+    };
+    function func(a, b, c, d) {
+      console.log(this, "hhh");
+      console.log(a, b, c, d);
+      return a + b + c + d;
+    }
+    const res = func.myBind(obj, 1, 2);
+    console.log(obj, res(3, 4));
+  </script>
+</html>
