@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class类继承</title>
+  </head>
+  <body></body>
+  <script>
+    class person {
+      name;
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    class man extends person {
+      sex;
+      constructor(name, sex) {
+        //super的作用是调用父类的构造函数
+        super(name);
+        this.sex = sex;
+      }
+    }
+    const yts = new man("yts", "man");
+  </script>
+</html>
