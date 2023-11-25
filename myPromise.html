@@ -7,24 +7,35 @@
   </head>
   <body></body>
   <script>
+    const PENDING = "pending";
+    const FULFILLED = "fulfilled";
+    const REJECTED = "rejected";
     class myPromise {
+      //添加状态
+      state = PENDING;
+      result = undefined;
       //添加构造函数
       constructor(func) {
         //定义resolve,reject
         const resolve = (result) => {
-          console.log("resolve");
+          if (this.state === PENDING) {
+            this.state = FULFILLED;
+            this.result = result;
+          }
         };
         const reject = (result) => {
-          console.log("reject");
+          if (this.state === PENDING) {
+            this.state = REJECTED;
+            this.result = result;
+          }
         };
-        console.log("create success");
         //执行回调函数
         func(resolve, reject);
       }
     }
 
     const p = new myPromise((res, rej) => {
-      res();
+      res(1);
       rej();
     });
   </script>
