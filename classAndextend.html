@@ -20,7 +20,33 @@
         super(name);
         this.sex = sex;
       }
+      abc() {
+        console.log(123);
+      }
     }
     const yts = new man("yts", "man");
+
+    //寄生组合式继承，class继承通过babel编译过后是寄生组合式继承的形式
+    //父类
+    function Food(name) {
+      this.name = name;
+    }
+    Food.prototype.eat = function () {
+      console.log("好好吃");
+    };
+
+    //通过构造函数继承属性
+    function Apple(name) {
+      Food.call(this, name);
+    }
+    //通过原型链继承方法,constructor改成子类的构造函数而不是父类的构造函数
+    const prototype = Object.create(Food.prototype, {
+      constructor: {
+        value: Apple,
+      },
+    });
+    Apple.prototype = prototype;
+    const apple = new Apple("apple");
+    console.log(apple);
   </script>
 </html>
