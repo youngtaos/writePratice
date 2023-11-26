@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttle</title>
+  </head>
+  <body></body>
+  <script>
+    function throttle(func, wait = 0) {
+      let timer;
+      return function (...args) {
+        const that = this;
+        if (timer !== undefined) {
+          return;
+        }
+        timer = setTimeout(() => {
+          func.apply(that, args);
+          timer = undefined;
+        }, wait);
+      };
+    }
+  </script>
+</html>

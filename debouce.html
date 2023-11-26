@@ -14,7 +14,7 @@
       // 将 debounce 处理结果当作函数返回
       // 触发事件回调时执行这个返回函数
       return function (...args) {
-        // this保存给context
+        // this保存给context (匿名函数的this指向要给原来的func用)
         const context = this;
         // 如果已经设定过定时器就清空上一次的定时器
         if (timer) clearTimeout(timer);
