@@ -21,5 +21,17 @@
       return flat;
     };
     console.log(arr.myFlat());
+
+    const myNew = function (arr) {
+      let flat = [];
+      for (let item of arr) {
+        if (Array.isArray(item)) {
+          flat = flat.concat(flat(item));
+        } else {
+          flat.push(item);
+        }
+      }
+      return flat;
+    };
   </script>
 </html>

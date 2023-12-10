@@ -9,11 +9,17 @@
   <script>
     function myNew(func, ...args) {
       //基于原型链，创建一个新对象
-      let newObj = Object.create(fn.prototype);
+      let newObj = Object.create(fnc.prototype);
       //添加属性到新对象上
       let ans = func.call(newObj, ...args);
       //如果返回值是一个对象，返回结果；否则返回新创建的对象
       return ans && typeof ans === "object" ? ans : newObj;
     }
+
+    Function.prototype.myNew = function (func, ...args) {
+      let newObj = Object.create(func.prototype);
+      let ans = func.call(newObj, ...args);
+      return ans && typeof ans === "object" ? ans : newObj;
+    };
   </script>
 </html>
