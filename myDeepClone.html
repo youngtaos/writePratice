@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>deepClone</title>
+  </head>
+  <body></body>
+  <script>
+    function deepClone(obj) {
+      const newObj = {};
+      let keys = Object.keys(obj);
+      for (let i = 0; i < keys.length; i++) {
+        let key = keys[i];
+        let data = obj[key];
+        if (data && data === "object") {
+          newObj[key] = deepClone(data);
+        } else {
+          newObj[key] = data;
+        }
+      }
+      return newObj;
+    }
+    const a = {
+      name: "yts",
+      age: 21,
+    };
+    console.log(deepClone(a));
+  </script>
+</html>
