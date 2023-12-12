@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lodash</title>
+  </head>
+  <body></body>
+  <script>
+    const myGet = function (source, path, defaultValue = undefined) {
+      // a[3].b -> a.3.b -> [a, 3, b]
+      //\[(\w+)\] 匹配类似 [something] 的字符串，其中 (\w+) 捕获了括号内的内容，也就是 something。
+
+      const paths = path
+        .replace(/\[(\w+)\]/g, ".$1") //替换部分 .$1 将匹配到的内容替换为捕获到的单词字符，即将 [something] 替换为 something。
+        .replace(/\["(\w+)"\]/g, ".$1") //替换部分 .$1 将匹配到的内容替换为捕获到的单词字符，即将 ["something"] 替换为 something。
+        .replace(/\['(\w+)'\]/g, ".$1") //替换部分 .$1 将匹配到的内容替换为捕获到的单词字符，即将 ['something'] 替换为 something。
+        .split(".");
+      let result = source;
+      for (const p of paths) {
+        result = result?.[p];
+      }
+      return result === undefined ? defaultValue : result;
+    };
+    const object = { a: [{ b: { c: 3 } }] };
+
+    //=> 3
+    console.log(myGet(object, "a[0].b.c"));
+
+    //=> 3
+    console.log(myGet(object, 'a[0]["b"]["c"]'));
+
+    //=> 10086
+    console.log(myGet(object, "a[100].b.c", 10086));
+  </script>
+</html>
