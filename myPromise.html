@@ -49,6 +49,30 @@
       });
     }
 
+    function myPromiseAllsettled(promises) {
+      return new Promise((resolve) => {
+        const data = [],
+          len = promises.length;
+        let count = len;
+        for (let i = 0; i < len; i++) {
+          const promise = promise[i];
+          promise
+            .then(
+              (res) => {
+                data[i] = { status: "fulfilled", value: res };
+              },
+              (error) => {
+                data[i] = { status: "rejected", value: error };
+              }
+            )
+            .finally(() => {
+              if (i === count) {
+                resolve(data);
+              }
+            });
+        }
+      });
+    }
     function myPromiseAll(iterable) {
       return new Promise((resolve, reject) => {
         const promises = Array.from(iterable);
@@ -71,6 +95,30 @@
       });
     }
 
+    function myPromiseAny(promises) {
+      return new Promise((res, rej) => {
+        let len = promises.length;
+        // 用于收集所有 reject
+        let errs = [];
+        // 如果传入的是一个空数组，那么就直接返回 AggregateError
+        if (len === 0)
+          return reject(new AggregateError("All promises were rejected"));
+        promises.forEach((promise) => {
+          promise.then(
+            (value) => {
+              resolve(value);
+            },
+            (err) => {
+              len--;
+              errs.push(err);
+              if (len === 0) {
+                reject(new AggregateError(errs));
+              }
+            }
+          );
+        });
+      });
+    }
     const p = new myPromise((res, rej) => {
       res(1);
       rej();
